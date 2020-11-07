@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
 import 'package:parking_app/screens/garage.dart';
 import 'package:parking_app/screens/parking.dart';
-import 'package:geolocator/geolocator.dart';
+
 
 class Login extends StatefulWidget {
   @override
@@ -19,14 +19,7 @@ class _LoginState extends State<Login> {
     Navigator.push(context, MaterialPageRoute(builder: (context) => Garage()));
   }
 
-  //to get user's location
-  _getCurrentLocation() async {
-    Position position = await Geolocator.getCurrentPosition(
-        desiredAccuracy: LocationAccuracy.high);
-    print(position);
-    return position;
-    
-  }
+  
 
   @override
   Widget build(BuildContext context) {
@@ -135,7 +128,7 @@ class _LoginState extends State<Login> {
             ),
             title: Text("Find Parking"),
             onTap: () {
-              _getCurrentLocation();
+              
               navigateToParking(context); //navigates to parking page
             },
           ),
