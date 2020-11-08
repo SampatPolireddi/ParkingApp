@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong/latlong.dart';
+import 'package:parking_app/screens/popularLocations.dart';
 import 'package:parking_app/screens/searchbar.dart';
 import 'package:user_location/user_location.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:flutter/services.dart';
 
 class Parking extends StatefulWidget {
   @override
@@ -11,17 +13,22 @@ class Parking extends StatefulWidget {
 }
 
 class _ParkingState extends State<Parking> {
-
   //To navigate to search bar page when search bar is pressed
   Future navigateToSearchBar(context) async {
     Navigator.push(
         context, MaterialPageRoute(builder: (context) => SearchBar()));
   }
 
+  //To navigate to popular locations page when a popular location is pressed
+  Future navigateToPopularLocations(context) async {
+    Navigator.push(
+        context, MaterialPageRoute(builder: (context) => PopularLocations()));
+  }
+
   // ADD THIS
   MapController mapController = MapController();
   UserLocationOptions userLocationOptions;
-  
+
   // ADD THIS
   List<Marker> markers = [];
 
@@ -103,9 +110,13 @@ class _ParkingState extends State<Parking> {
                                       vertical: 16.0),
                                   child: GestureDetector(
                                     onTap: () {
-                                       navigateToSearchBar(context);;
+                                      HapticFeedback.selectionClick();
+                                      navigateToSearchBar(context);
                                     },
-                                    child: Text("Search Destination"),
+                                    child: Text(
+                                      "Search Destination",
+                                      style: GoogleFonts.poppins(),
+                                    ),
                                   ),
                                 ),
                               ),
@@ -118,18 +129,85 @@ class _ParkingState extends State<Parking> {
                           padding: const EdgeInsets.only(left: 15.0),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              Icon(Icons.location_pin),
+                            children: <Widget>[
                               SizedBox(
                                 width: 5,
                               ),
                               Text(
-                                "Nearby Locations :",
+                                "Popular Locations :",
                                 style: GoogleFonts.poppins(fontSize: 15),
                               ),
                             ],
                           ),
                         ),
+                        SizedBox(height: 20),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 15.0),
+                          child: GestureDetector(
+                            onTap: () {
+                              HapticFeedback.selectionClick();
+                              navigateToPopularLocations(context);
+                            },
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: <Widget>[
+                                Icon(
+                                  Icons.location_pin,
+                                  size: 25,
+                                ),
+                                SizedBox(
+                                  width: 5,
+                                ),
+                                Text(
+                                  "Formum Mall",
+                                  style: GoogleFonts.poppins(fontSize: 18),
+                                ),
+                                SizedBox(
+                                  width: 200,
+                                ),
+                                Icon(
+                                  Icons.arrow_forward_ios,
+                                  color: Colors.grey,
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          height: 15,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 15.0),
+                          child: GestureDetector(
+                            onTap: () {
+                              HapticFeedback.selectionClick();
+                              navigateToPopularLocations(context);
+                            },
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: <Widget>[
+                                Icon(
+                                  Icons.location_pin,
+                                  size: 25,
+                                ),
+                                SizedBox(
+                                  width: 5,
+                                ),
+                                Text(
+                                  "GVK One Mall",
+                                  style: GoogleFonts.poppins(fontSize: 18),
+                                ),
+                                SizedBox(
+                                  width: 200,
+                                ),
+                                Icon(
+                                  Icons.arrow_forward_ios,
+                                  color: Colors.grey,
+                                ),
+                              ],
+                            ),
+                          ),
+                        )
                       ],
                     ),
                   ),

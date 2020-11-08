@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
 import 'package:parking_app/screens/garage.dart';
 import 'package:parking_app/screens/parking.dart';
-
+import 'package:flutter/services.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class Login extends StatefulWidget {
   @override
@@ -18,8 +19,6 @@ class _LoginState extends State<Login> {
   Future navigateToGarage(context) async {
     Navigator.push(context, MaterialPageRoute(builder: (context) => Garage()));
   }
-
-  
 
   @override
   Widget build(BuildContext context) {
@@ -51,7 +50,7 @@ class _LoginState extends State<Login> {
             child: Container(
               child: Text(
                 "Get Started",
-                style: TextStyle(fontSize: 30),
+                style: GoogleFonts.poppins(fontSize: 30,),
               ),
             ),
           ),
@@ -65,7 +64,7 @@ class _LoginState extends State<Login> {
             child: Container(
               child: Text(
                 "Any time we start something new it is exciting and we are very motivated and committed.",
-                style: TextStyle(fontSize: 18),
+                style: GoogleFonts.poppins(fontSize: 18),
                 textAlign: TextAlign.center,
               ),
             ),
@@ -73,14 +72,16 @@ class _LoginState extends State<Login> {
 
           //Login Buttons
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 60.0, vertical: 80),
+            padding: const EdgeInsets.symmetric(horizontal: 60.0, vertical: 60),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.end,
               children: <Widget>[
                 //google signin
                 SizedBox(
-                  child: SignInButton(Buttons.GoogleDark,
-                      onPressed: () => _onButtonPressed() //Sign in Button
+                  child: SignInButton(Buttons.GoogleDark, onPressed: () {
+                    HapticFeedback.selectionClick();
+                    _onButtonPressed();
+                  } //Sign in Button
                       ),
                 ),
               ],
@@ -126,9 +127,9 @@ class _LoginState extends State<Login> {
               color: Colors.black,
               size: 35,
             ),
-            title: Text("Find Parking"),
+            title: Text("Find Parking",style: GoogleFonts.poppins(),),
             onTap: () {
-              
+              HapticFeedback.selectionClick();
               navigateToParking(context); //navigates to parking page
             },
           ),
@@ -141,8 +142,9 @@ class _LoginState extends State<Login> {
               color: Colors.black,
               size: 35,
             ),
-            title: Text("Rent Your Garage"),
+            title: Text("Rent Your Garage",style: GoogleFonts.poppins()),
             onTap: () {
+              HapticFeedback.selectionClick();
               navigateToGarage(context); //navigates to garage page
             },
           ),
