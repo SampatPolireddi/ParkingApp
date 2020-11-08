@@ -122,8 +122,8 @@ class _LoginState extends State<Login> {
           padding: const EdgeInsets.only(top: 8.0, left: 8.0, right: 8.0),
           child: ListTile(
             leading: Icon(
-              Icons.local_parking_rounded,
-              color: Colors.blueAccent,
+              Icons.car_repair,
+              color: Colors.black,
               size: 35,
             ),
             title: Text("Find Parking"),
@@ -137,8 +137,8 @@ class _LoginState extends State<Login> {
           padding: const EdgeInsets.only(top: 8.0, left: 8.0, right: 8.0),
           child: ListTile(
             leading: Icon(
-              Icons.monetization_on_rounded,
-              color: Colors.blueAccent,
+              Icons.hourglass_empty_rounded,
+              color: Colors.black,
               size: 35,
             ),
             title: Text("Rent Your Garage"),

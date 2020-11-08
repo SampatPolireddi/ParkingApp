@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong/latlong.dart';
 import 'package:user_location/user_location.dart';
-import 'package:material_floating_search_bar/material_floating_search_bar.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class Parking extends StatefulWidget {
   @override
@@ -25,49 +25,97 @@ class _ParkingState extends State<Parking> {
       markers: markers,
     );
     return Scaffold(
-        body: Column(
-      children: <Widget>[
-        Container(
-          height: MediaQuery.of(context).size.height - 300.0,
-          width: MediaQuery.of(context).size.width,
-          child: FlutterMap(
-            options: MapOptions(
-              center: LatLng(0, 0),
-              zoom: 17.0,
-              plugins: [
+      body: Column(
+        children: <Widget>[
+          Container(
+            height: MediaQuery.of(context).size.height - 300.0,
+            width: MediaQuery.of(context).size.width,
+            child: FlutterMap(
+              options: MapOptions(
+                center: LatLng(0, 0),
+                zoom: 17.0,
+                plugins: [
+                  // ADD THIS
+                  UserLocationPlugin(),
+                ],
+              ),
+              layers: [
+                new TileLayerOptions(
+                    urlTemplate:
+                        "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+                    subdomains: ['a', 'b', 'c']),
                 // ADD THIS
-                UserLocationPlugin(),
+                MarkerLayerOptions(markers: markers),
+                // ADD THIS
+                userLocationOptions,
               ],
+              // ADD THIS
+              mapController: mapController,
             ),
-            layers: [
-              new TileLayerOptions(
-                  urlTemplate:
-                      "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
-                  subdomains: ['a', 'b', 'c']),
-              // ADD THIS
-              MarkerLayerOptions(markers: markers),
-              // ADD THIS
-              userLocationOptions,
-            ],
-            // ADD THIS
-            mapController: mapController,
           ),
-        ),
-        Expanded(
-          child: Container(
-            
+          Expanded(
+            child: Container(
               decoration: BoxDecoration(
-                  color: Colors.blue[50], //remove color to make it transpatent
-                  border: Border.all(
-                      style: BorderStyle.solid, color: Colors.white)),
-              child: Row(
-                
+                  color: Colors.grey[50], //remove color to make it transpatent
+                  ),
+              child: Column(
+                children: <Widget>[
+                  Container(
+                    child: Padding(
+                      padding: const EdgeInsets.all(20.0),
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          Text(
+                            "Need A Parking Spot?",
+                            style: GoogleFonts.poppins(fontSize: 30),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  Container(
+                    child: Column(
+                      children: <Widget>[
+                        Padding(
+                          padding: const EdgeInsets.only(left:20.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Icon(
+                                Icons.location_pin),
+                                SizedBox(width: 5,),
+                              Text(
+                                "Nearby Locations :",
+                                style: GoogleFonts.poppins(fontSize: 15),
+                              ),
+                            ],
+                          ),
+                        ),
+                       
 
+                        
+
+
+
+
+
+
+
+
+
+
+
+
+                      ],
+                    ),
+                  ),
+                ],
               ),
-              ),
-              ),
-      ],
-        ),
-      );
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }
