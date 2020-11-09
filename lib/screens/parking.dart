@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong/latlong.dart';
 import 'package:parking_app/screens/popularLocations.dart';
+import 'package:parking_app/screens/popularLocations1.dart';
 import 'package:parking_app/screens/searchbar.dart';
 import 'package:user_location/user_location.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -19,7 +20,13 @@ class _ParkingState extends State<Parking> {
         context, MaterialPageRoute(builder: (context) => SearchBar()));
   }
 
-  //To navigate to popular locations page when a popular location is pressed
+  //To navigate to popular locations page when a forum mall is pressed
+  Future navigateToPopularLocations1(context) async {
+    Navigator.push(
+        context, MaterialPageRoute(builder: (context) => PopularLocations1()));
+  }
+
+  //To navigate to popular locations page when a gvk mall is pressed
   Future navigateToPopularLocations(context) async {
     Navigator.push(
         context, MaterialPageRoute(builder: (context) => PopularLocations()));
@@ -146,7 +153,7 @@ class _ParkingState extends State<Parking> {
                           child: GestureDetector(
                             onTap: () {
                               HapticFeedback.selectionClick();
-                              navigateToPopularLocations(context);
+                              navigateToPopularLocations1(context);
                             },
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.start,
